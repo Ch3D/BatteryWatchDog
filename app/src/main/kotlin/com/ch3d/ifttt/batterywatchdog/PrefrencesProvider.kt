@@ -29,7 +29,7 @@ class PrefrencesProvider {
 
         fun isCustomNameEnabled(context: Context) = getBool(context, CUSTOM_DEVICE_ENABLED)
 
-        fun isCustomEventEnabled(context: Context) = getBool(context, CUSTOM_DEVICE_ENABLED)
+        fun isCustomEventEnabled(context: Context) = getBool(context, CUSTOM_EVENT_ENABLED)
 
         fun setCustomNameEnabled(context: Context, enabled: Boolean) =
                 getDefaultSharedPreferences(context).edit()
@@ -37,7 +37,7 @@ class PrefrencesProvider {
 
         fun setCustomEventEnabled(context: Context, enabled: Boolean) =
                 getDefaultSharedPreferences(context).edit()
-                        .putBoolean(CUSTOM_EVENT_NAME, enabled).commit()
+                        .putBoolean(CUSTOM_EVENT_ENABLED, enabled).commit()
 
         fun saveIftttKey(context: Context, key: String) =
                 getDefaultSharedPreferences(context).edit()

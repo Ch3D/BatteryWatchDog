@@ -32,24 +32,24 @@ class MainActivity : AppCompatActivity() {
 
         checkbox_custom_device_name.setOnCheckedChangeListener { compoundButton, checked ->
             edit_custom_device_name.isEnabled = checked
-            setCustomNameEnabled(checked)
+            // setCustomNameEnabled(checked)
         }
 
         checkbox_custom_event.setOnCheckedChangeListener { compoundButton, checked ->
             edit_custom_event.isEnabled = checked
-            setCustomEventEnabled(checked)
+            // setCustomEventEnabled(checked)
         }
 
         btn_save.setOnClickListener {
             saveIftttKey(edit_key.text.toString())
 
-            val enabledCustomName = checkbox_custom_device_name.isEnabled
+            val enabledCustomName = checkbox_custom_device_name.isChecked
             setCustomNameEnabled(enabledCustomName)
             if (enabledCustomName) {
                 saveCustomDeviceName(edit_custom_device_name.text.toString())
             }
 
-            val enabledCustomEvent = checkbox_custom_event.isEnabled
+            val enabledCustomEvent = checkbox_custom_event.isChecked
             setCustomEventEnabled(enabledCustomEvent)
             if (enabledCustomEvent) {
                 saveCustomEventName(edit_custom_event.text.toString())
