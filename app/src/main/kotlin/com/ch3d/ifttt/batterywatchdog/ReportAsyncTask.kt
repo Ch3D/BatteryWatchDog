@@ -8,41 +8,45 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 
-class ReportAsyncTask : AsyncTask<String, Void, Boolean>() {
+class ReportAsyncTask : AsyncTask<ReportData, Void, Boolean>() {
 
     companion object {
         val TAG = ReportAsyncTask::class.java.simpleName
     }
 
-    private val BASE_URL = "https://maker.ifttt.com/trigger/%s/with/key/%s?value1=%s&value2=%s"
-    private val EVENT_BATTERY_LOW = "ANDROID_BATTERY_LOW"
     private val PARAMS_ENCODING = "UTF-8"
 
     @Throws(UnsupportedEncodingException::class)
     private fun encodeParam(value: String?) = URLEncoder.encode(value, PARAMS_ENCODING)
 
-    override fun doInBackground(vararg params: String?): Boolean {
-        val key = params[0]
-        val deviceName = params[1]
-        val batteryPercentage = params[2]
+    override fun doInBackground(vararg params: ReportData?): Boolean {
+        val data = params[0]
+        if (data == null) {
+            Log.v(TAG, "Unable to battery report for data = " + data)
+            return false
+        }
 
         try {
-            val strUrl = String.format(BASE_URL, EVENT_BATTERY_LOW, key,
-                    encodeParam(deviceName), encodeParam(batteryPercentage))
-            val url = URL(strUrl)
+            val url = URL("https://maker.ifttt.com/trigger/" +
+                    "${data?.event}/with/key/${data?.key}?" +
+                    "value1=${encodeParam(data?.deviceName)}&" +
+                    "value2=${encodeParam(data?.batteryPercentage)}")
+            
             val connection = url.openConnection() as HttpURLConnection
             try {
                 val responseCode = connection.responseCode
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     Log.v(TAG, "Battery report action status = " + responseCode)
                 }
-                return responseCode == 200
+                return isSuccess(responseCode)
             } finally {
                 connection.disconnect()
             }
         } catch (e: IOException) {
             Log.e(TAG, "", e)
+            return false
         }
-        return false
     }
+
+    private fun isSuccess(responseCode: Int) = (responseCode % 100) == 2
 }

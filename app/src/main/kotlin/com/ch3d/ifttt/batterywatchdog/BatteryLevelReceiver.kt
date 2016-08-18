@@ -11,6 +11,8 @@ import com.ch3d.ifttt.batterywatchdog.PrefrencesProvider.Companion.getDefaultDev
 
 class BatteryLevelReceiver : BroadcastReceiver() {
 
+    private val EVENT_BATTERY_LOW = "ANDROID_BATTERY_LOW"
+
     override fun onReceive(context: Context, intent: Intent) {
         val key = context.getIftttKey()
         if (TextUtils.isEmpty(key)) {
@@ -20,7 +22,7 @@ class BatteryLevelReceiver : BroadcastReceiver() {
         val deviceName = if (context.isCustomNameEnabled())
             context.getCustomDeviceName() else getDefaultDeviceName()
 
-        ReportAsyncTask().execute(key, deviceName, getBatteryPercentage(context))
+        ReportAsyncTask().execute(key, EVENT_BATTERY_LOW, deviceName, getBatteryPercentage(context))
     }
 
     private fun getBatteryPercentage(context: Context): String {
