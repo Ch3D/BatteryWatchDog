@@ -3,5 +3,8 @@
     <string name="main_hint_ifttt_key">IFTTT key</string>
     <string name="main_toast_ifttt_key">IFTTT key saved</string>
     <string name="main_custom_device_name">Custom device name</string>
+    <string name="main_custom_event">Custom event name</string>
     <string name="main_enable_custom_device_name">Enable custom device name</string>
+    <string name="main_enable_custom_event_name">Enable event name</string>
+    <string name="action_save">Save</string>
 </resources>

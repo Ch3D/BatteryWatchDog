@@ -16,15 +16,28 @@ class MainActivity : AppCompatActivity() {
         if (getCustomDeviceName() == null) {
             saveCustomDeviceName(PrefrencesProvider.getDefaultDeviceName())
         }
+        if (getCustomEventName() == null) {
+            saveCustomEventName(ReportData.EVENT_BATTERY_LOW)
+        }
 
         edit_key.setText(getIftttKey())
+
         edit_custom_device_name.setText(getCustomDeviceName())
         edit_custom_device_name.isEnabled = isCustomNameEnabled()
         checkbox_custom_device_name.isChecked = isCustomNameEnabled()
 
+        edit_custom_event.setText(getCustomEventName())
+        edit_custom_event.isEnabled = isCustomEventEnabled()
+        checkbox_custom_event.isChecked = isCustomEventEnabled()
+
         checkbox_custom_device_name.setOnCheckedChangeListener { compoundButton, checked ->
             edit_custom_device_name.isEnabled = checked
             setCustomNameEnabled(checked)
+        }
+
+        checkbox_custom_event.setOnCheckedChangeListener { compoundButton, checked ->
+            edit_custom_event.isEnabled = checked
+            setCustomEventEnabled(checked)
         }
 
         btn_save.setOnClickListener {
@@ -36,7 +49,13 @@ class MainActivity : AppCompatActivity() {
                 saveCustomDeviceName(edit_custom_device_name.text.toString())
             }
 
-            Toast.makeText(this@MainActivity, R.string.main_hint_ifttt_key, LENGTH_SHORT).show()
+            val enabledCustomEvent = checkbox_custom_event.isEnabled
+            setCustomEventEnabled(enabledCustomEvent)
+            if (enabledCustomEvent) {
+                saveCustomEventName(edit_custom_event.text.toString())
+            }
+
+            Toast.makeText(this@MainActivity, R.string.main_toast_ifttt_key, LENGTH_SHORT).show()
         }
 
         startService(Intent(this, BatteryService::class.java))
