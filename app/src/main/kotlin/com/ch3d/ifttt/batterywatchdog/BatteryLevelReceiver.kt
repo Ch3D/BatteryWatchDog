@@ -22,7 +22,8 @@ class BatteryLevelReceiver : BroadcastReceiver() {
         val deviceName = if (context.isCustomNameEnabled())
             context.getCustomDeviceName() else getDefaultDeviceName()
 
-        ReportAsyncTask().execute(key, EVENT_BATTERY_LOW, deviceName, getBatteryPercentage(context))
+        ReportData(key!!, EVENT_BATTERY_LOW, deviceName!!, getBatteryPercentage(context))
+        ReportAsyncTask().execute()
     }
 
     private fun getBatteryPercentage(context: Context): String {

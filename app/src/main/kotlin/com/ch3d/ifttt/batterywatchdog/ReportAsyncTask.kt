@@ -31,7 +31,7 @@ class ReportAsyncTask : AsyncTask<ReportData, Void, Boolean>() {
                     "${data?.event}/with/key/${data?.key}?" +
                     "value1=${encodeParam(data?.deviceName)}&" +
                     "value2=${encodeParam(data?.batteryPercentage)}")
-            
+
             val connection = url.openConnection() as HttpURLConnection
             try {
                 val responseCode = connection.responseCode
