@@ -9,11 +9,11 @@ class PrefrencesProvider {
     companion object {
         private val DEFAULT_RESULT = ""
 
-        private val IFTTT_KEY = "com.ch3d.ifttt.batterywatchdog.ifttt_key"
-        private val CUSTOM_DEVICE_ENABLED = "com.ch3d.ifttt.batterywatchdog.custom_device_enabled"
-        private val CUSTOM_EVENT_ENABLED = "com.ch3d.ifttt.batterywatchdog.custom_event_enabled"
-        private val CUSTOM_DEVICE_NAME = "com.ch3d.ifttt.batterywatchdog.custom_device_name"
-        private val CUSTOM_EVENT_NAME = "com.ch3d.ifttt.batterywatchdog.custom_event_name"
+        private val IFTTT_KEY = "${BuildConfig.APPLICATION_ID}.ifttt_key"
+        private val CUSTOM_DEVICE_ENABLED = "${BuildConfig.APPLICATION_ID}.custom_device_enabled"
+        private val CUSTOM_EVENT_ENABLED = "${BuildConfig.APPLICATION_ID}.custom_event_enabled"
+        private val CUSTOM_DEVICE_NAME = "${BuildConfig.APPLICATION_ID}.custom_device_name"
+        private val CUSTOM_EVENT_NAME = "${BuildConfig.APPLICATION_ID}.custom_event_name"
 
         fun getString(context: Context, key: String, default: String? = DEFAULT_RESULT): String? =
                 getDefaultSharedPreferences(context).getString(key, default)
