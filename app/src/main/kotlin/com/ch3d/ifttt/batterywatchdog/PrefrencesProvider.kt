@@ -3,9 +3,8 @@ package com.ch3d.ifttt.batterywatchdog
 import android.content.Context
 import android.os.Build
 import android.preference.PreferenceManager.getDefaultSharedPreferences
-import com.ch3d.ifttt.batterywatchdog.PrefrencesProvider.Companion
 
-class PrefrencesProvider {
+open class PrefrencesProvider {
     companion object {
         private val DEFAULT_RESULT = ""
 
@@ -55,15 +54,3 @@ class PrefrencesProvider {
     }
 }
 
-fun Context.isCustomNameEnabled() = Companion.isCustomNameEnabled(this)
-fun Context.setCustomNameEnabled(enabled: Boolean) = Companion.setCustomNameEnabled(this, enabled)
-fun Context.getCustomDeviceName() = Companion.getCustomDeviceName(this)
-fun Context.saveCustomDeviceName(name: String) = Companion.saveCustomDeviceName(this, name)
-
-fun Context.isCustomEventEnabled() = Companion.isCustomEventEnabled(this)
-fun Context.setCustomEventEnabled(enabled: Boolean) = Companion.setCustomEventEnabled(this, enabled)
-fun Context.getCustomEventName() = Companion.getCustomEventName(this)
-fun Context.saveCustomEventName(name: String) = Companion.saveCustomEventName(this, name)
-
-fun Context.getIftttKey() = Companion.getIftttKey(this)
-fun Context.saveIftttKey(key: String) = Companion.saveIftttKey(this, key)

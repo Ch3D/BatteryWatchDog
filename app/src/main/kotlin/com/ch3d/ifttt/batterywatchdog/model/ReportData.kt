@@ -1,4 +1,4 @@
-package com.ch3d.ifttt.batterywatchdog
+package com.ch3d.ifttt.batterywatchdog.model
 
 data class ReportData(val key: String,
                       val event: String,

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import com.ch3d.ifttt.batterywatchdog.model.ReportData
+import com.ch3d.ifttt.batterywatchdog.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,12 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         checkbox_custom_device_name.setOnCheckedChangeListener { compoundButton, checked ->
             edit_custom_device_name.isEnabled = checked
-            // setCustomNameEnabled(checked)
         }
 
         checkbox_custom_event.setOnCheckedChangeListener { compoundButton, checked ->
             edit_custom_event.isEnabled = checked
-            // setCustomEventEnabled(checked)
         }
 
         btn_save.setOnClickListener {
