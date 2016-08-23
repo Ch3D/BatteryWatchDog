@@ -1,6 +1,5 @@
 package com.ch3d.ifttt.batterywatchdog
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -57,7 +56,5 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(this@MainActivity, R.string.main_toast_ifttt_key, LENGTH_SHORT).show()
         }
-
-        startService(Intent(this, BatteryService::class.java))
     }
 }

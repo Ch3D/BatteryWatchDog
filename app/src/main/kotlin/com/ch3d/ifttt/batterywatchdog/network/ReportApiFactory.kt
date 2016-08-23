@@ -18,7 +18,7 @@ class ReportApiFactory {
     protected class ReportSender() : ReportApi {
 
         override fun report(data: ReportData) {
-            ReportAsyncTask().execute()
+            ReportAsyncTask().execute(data)
         }
 
         protected class ReportAsyncTask() : AsyncTask<ReportData, Void, Boolean>() {
