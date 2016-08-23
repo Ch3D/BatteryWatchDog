@@ -24,14 +24,10 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter android:priority="900">
-                <action android:name="android.intent.action.ACTION_BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".BatteryService"
-            android:enabled="true"
-            android:exported="false" />
     </application>
 
 </manifest>
