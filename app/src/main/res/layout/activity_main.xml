@@ -13,8 +13,7 @@
 
     <EditText
         android:id="@+id/edit_key"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/EditText.Value"
         android:hint="@string/main_hint_ifttt_key" />
 
     <CheckBox
@@ -26,8 +25,7 @@
 
     <EditText
         android:id="@+id/edit_custom_device_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/EditText.Value"
         android:hint="@string/main_custom_device_name" />
 
     <CheckBox
@@ -39,8 +37,7 @@
 
     <EditText
         android:id="@+id/edit_custom_event"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/EditText.Value"
         android:hint="@string/main_custom_event" />
 
     <Button
