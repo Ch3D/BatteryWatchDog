@@ -11,6 +11,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ch3d.ifttt.batterywatchdog.MainActivity">
 
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switch_reporting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Battery low reporting"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
     <EditText
         android:id="@+id/edit_key"
         style="@style/EditText.Value"

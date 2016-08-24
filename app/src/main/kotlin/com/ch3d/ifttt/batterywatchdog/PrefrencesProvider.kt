@@ -13,6 +13,7 @@ class PrefrencesProvider {
         private val CUSTOM_EVENT_ENABLED = "${BuildConfig.APPLICATION_ID}.custom_event_enabled"
         private val CUSTOM_DEVICE_NAME = "${BuildConfig.APPLICATION_ID}.custom_device_name"
         private val CUSTOM_EVENT_NAME = "${BuildConfig.APPLICATION_ID}.custom_event_name"
+        private val REPORTING_ENABLED = "${BuildConfig.APPLICATION_ID}.reporting_enabled"
 
         fun getString(context: Context, key: String, default: String? = DEFAULT_RESULT): String? =
                 getDefaultSharedPreferences(context).getString(key, default)
@@ -51,6 +52,13 @@ class PrefrencesProvider {
         fun saveCustomEventName(context: Context, deviceName: String) =
                 getDefaultSharedPreferences(context).edit()
                         .putString(CUSTOM_EVENT_NAME, deviceName).commit()
+
+        fun isReportinEnabled(context: Context) =
+                getDefaultSharedPreferences(context).getBoolean(REPORTING_ENABLED, true)
+
+        fun setReportinEnabled(context: Context, enabled: Boolean) =
+                getDefaultSharedPreferences(context).edit()
+                        .putBoolean(REPORTING_ENABLED, enabled).commit()
     }
 }
 

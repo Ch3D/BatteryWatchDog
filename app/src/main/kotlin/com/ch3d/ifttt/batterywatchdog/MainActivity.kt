@@ -31,6 +31,19 @@ class MainActivity : AppCompatActivity() {
             saveCustomEventName(ReportData.EVENT_BATTERY_LOW)
         }
 
+        switch_reporting.isChecked = isReportingEnabled()
+
+        switch_reporting.setOnCheckedChangeListener { compoundButton, checked ->
+            edit_key.isEnabled = checked
+            edit_custom_device_name.isEnabled = checked && isCustomNameEnabled()
+            edit_custom_event.isEnabled = checked && isCustomEventEnabled()
+            btn_save.isEnabled = checked && hasChanges()
+            checkbox_custom_device_name.isEnabled = checked
+            checkbox_custom_event.isEnabled = checked
+
+            setReportinEnabled(checked)
+        }
+
         edit_key.setText(getIftttKey())
         edit_key.addTextChangedListener(getTextWatcher())
 

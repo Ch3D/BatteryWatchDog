@@ -29,3 +29,6 @@ fun Context.saveCustomEventName(name: String) =
 
 fun Context.getIftttKey() = PrefrencesProvider.getIftttKey(this)
 fun Context.saveIftttKey(key: String) = PrefrencesProvider.saveIftttKey(this, key)
+
+fun Context.isReportingEnabled() = PrefrencesProvider.isReportinEnabled(this)
+fun Context.setReportinEnabled(enabled: Boolean) = PrefrencesProvider.setReportinEnabled(this, enabled)
