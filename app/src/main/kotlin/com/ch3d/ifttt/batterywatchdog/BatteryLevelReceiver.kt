@@ -14,6 +14,10 @@ import com.ch3d.ifttt.batterywatchdog.utils.*
 
 class BatteryLevelReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        if (!context.isReportingEnabled()) {
+            return
+        }
+
         val key = context.getIftttKey()
         if (TextUtils.isEmpty(key)) {
             return
