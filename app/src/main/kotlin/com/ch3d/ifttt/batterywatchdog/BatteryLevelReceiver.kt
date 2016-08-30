@@ -11,7 +11,10 @@ import com.ch3d.ifttt.batterywatchdog.PrefrencesProvider.Companion.getDefaultDev
 import com.ch3d.ifttt.batterywatchdog.model.BaseRule
 import com.ch3d.ifttt.batterywatchdog.model.RuleData
 import com.ch3d.ifttt.batterywatchdog.network.ReportApiFactory
-import com.ch3d.ifttt.batterywatchdog.utils.*
+import com.ch3d.ifttt.batterywatchdog.utils.getCustomDeviceName
+import com.ch3d.ifttt.batterywatchdog.utils.getIftttKey
+import com.ch3d.ifttt.batterywatchdog.utils.isCustomNameEnabled
+import com.ch3d.ifttt.batterywatchdog.utils.isReportingEnabled
 
 class BatteryLevelReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -27,13 +30,10 @@ class BatteryLevelReceiver : BroadcastReceiver() {
         val deviceName = if (context.isCustomNameEnabled())
             context.getCustomDeviceName() else getDefaultDeviceName()
 
-        val event = if (context.isCustomEventEnabled())
-            context.getCustomEventName() else BaseRule.EVENT_BATTERY_LOW
-
         ReportApiFactory
                 .create(context)
                 .report(
-                        BaseRule(0, key!!, event!!,
+                        BaseRule(0, key!!, BaseRule.EVENT_BATTERY_LOW,
                                 RuleData(deviceName!!, getBatteryPercentage(context)))
                 )
     }
