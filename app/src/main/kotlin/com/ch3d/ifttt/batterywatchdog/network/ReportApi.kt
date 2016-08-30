@@ -1,7 +1,7 @@
 package com.ch3d.ifttt.batterywatchdog.network
 
-import com.ch3d.ifttt.batterywatchdog.model.ReportData
+import com.ch3d.ifttt.batterywatchdog.model.Rule
 
-interface ReportApi {
-    fun report(data: ReportData)
+internal interface ReportApi {
+    fun report(data: Rule)
 }

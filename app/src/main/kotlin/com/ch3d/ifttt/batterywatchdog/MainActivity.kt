@@ -6,31 +6,37 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import com.ch3d.ifttt.batterywatchdog.model.ReportData
+import com.ch3d.android.utils.StringUtils.Companion.EMPTY_STRING
+import com.ch3d.ifttt.batterywatchdog.model.BaseRule
+import com.ch3d.ifttt.batterywatchdog.model.RuleData
 import com.ch3d.ifttt.batterywatchdog.utils.*
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var initialData: ReportData
+    internal lateinit var initialData: BaseRule
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initialData = ReportData(
-                getIftttKey() ?: "",
-                getCustomEventName() ?: "",
-                getCustomDeviceName() ?: "",
-                "")
+        initialData = BaseRule(0,
+                getIftttKey() ?: EMPTY_STRING,
+                getCustomEventName() ?: EMPTY_STRING,
+                RuleData(getCustomDeviceName() ?: EMPTY_STRING))
 
         if (getCustomDeviceName() == null) {
             saveCustomDeviceName(PrefrencesProvider.getDefaultDeviceName())
         }
         if (getCustomEventName() == null) {
-            saveCustomEventName(ReportData.EVENT_BATTERY_LOW)
+            saveCustomEventName(BaseRule.EVENT_BATTERY_LOW)
         }
 
+        initUi()
+    }
+
+    private fun initUi() {
         switch_reporting.isChecked = isReportingEnabled()
 
         switch_reporting.setOnCheckedChangeListener { compoundButton, checked ->
@@ -92,11 +98,15 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, R.string.main_toast_data_saved, LENGTH_SHORT).show()
 
             btn_save.isEnabled = false
-            initialData = ReportData(
+            initialData = BaseRule(0,
                     edit_key.text(),
                     edit_custom_event.text(),
-                    edit_custom_device_name.text(),
-                    "")
+                    RuleData(edit_custom_device_name.text()))
+            val realm = Realm.getDefaultInstance()
+            realm.beginTransaction()
+            val realmRule = realm.copyToRealmOrUpdate(initialData)
+            realm.commitTransaction()
+
             hideKeyboard()
         }
     }
@@ -121,11 +131,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun hasChanges(): Boolean {
-        val updatedData = ReportData(
+        val updatedData = BaseRule(0,
                 edit_key.text(),
                 edit_custom_event.text(),
-                edit_custom_device_name.text(),
-                "")
+                RuleData(edit_custom_device_name.text()))
         return !initialData.equals(updatedData)
     }
 }

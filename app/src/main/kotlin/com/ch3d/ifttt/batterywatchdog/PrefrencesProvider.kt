@@ -3,6 +3,7 @@ package com.ch3d.ifttt.batterywatchdog
 import android.content.Context
 import android.os.Build
 import android.preference.PreferenceManager.getDefaultSharedPreferences
+import com.ch3d.android.utils.StringUtils
 
 class PrefrencesProvider {
     companion object {
@@ -43,7 +44,7 @@ class PrefrencesProvider {
                 getDefaultSharedPreferences(context).edit()
                         .putString(IFTTT_KEY, key).commit()
 
-        fun getDefaultDeviceName() = Build.BRAND + " " + Build.MODEL
+        fun getDefaultDeviceName() = Build.BRAND + StringUtils.SPACE + Build.MODEL
 
         fun saveCustomDeviceName(context: Context, deviceName: String) =
                 getDefaultSharedPreferences(context).edit()
