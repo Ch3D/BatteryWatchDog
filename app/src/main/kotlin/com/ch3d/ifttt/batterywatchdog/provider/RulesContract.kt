@@ -1,4 +1,4 @@
-package com.ch3d.ifttt.batterywatchdog.content
+package com.ch3d.ifttt.batterywatchdog.provider
 
 import android.net.Uri
 

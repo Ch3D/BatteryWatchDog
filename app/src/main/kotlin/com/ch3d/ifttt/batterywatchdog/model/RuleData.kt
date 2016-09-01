@@ -2,9 +2,9 @@ package com.ch3d.ifttt.batterywatchdog.model
 
 import android.content.ContentValues
 import com.ch3d.android.utils.StringUtils.Companion.EMPTY_STRING
-import com.ch3d.ifttt.batterywatchdog.content.RulesContract.RuleColumns.VALUE_1
-import com.ch3d.ifttt.batterywatchdog.content.RulesContract.RuleColumns.VALUE_2
-import com.ch3d.ifttt.batterywatchdog.content.RulesContract.RuleColumns.VALUE_3
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE_1
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE_2
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE_3
 import io.realm.RealmObject
 import io.realm.annotations.RealmClass
 

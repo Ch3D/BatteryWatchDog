@@ -1,12 +1,12 @@
 package com.ch3d.ifttt.batterywatchdog.model
 
 import android.content.ContentValues
-import com.ch3d.ifttt.batterywatchdog.content.RulesContract
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract
 
 internal interface Rule {
     companion object {
         fun create(values: ContentValues): Rule {
-            return BaseRule(values.getAsLong(RulesContract.RuleColumns.ID),
+            return BaseRule(values.getAsLong(RulesContract.RuleColumns.ID) ?: 0,
                     values.getAsString(RulesContract.RuleColumns.KEY),
                     values.getAsString(RulesContract.RuleColumns.EVENT_NAME),
                     RuleData(values)

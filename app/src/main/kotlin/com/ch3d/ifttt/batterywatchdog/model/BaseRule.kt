@@ -4,7 +4,7 @@ import android.content.ContentValues
 import com.ch3d.android.utils.StringUtils.Companion.EMPTY_STRING
 import com.ch3d.android.utils.add
 import com.ch3d.android.utils.addAll
-import com.ch3d.ifttt.batterywatchdog.content.RulesContract.RuleColumns
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
@@ -23,7 +23,7 @@ internal open class BaseRule(@PrimaryKey var id: Long,
     }
 
     override fun contentValues(): ContentValues {
-        return contentValues()
+        return ContentValues()
                 .add(RuleColumns.KEY, key)
                 .add(RuleColumns.EVENT_NAME, event)
                 .addAll(data.contentValues() ?: ContentValues())
