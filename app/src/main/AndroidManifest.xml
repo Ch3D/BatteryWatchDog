@@ -28,6 +28,13 @@
             </intent-filter>
         </receiver>
 
+        <provider
+            android:name=".provider.RulesContentProvider"
+            android:authorities="com.ch3d.ifttt"
+            android:exported="true"
+            android:readPermission="com.ch3d.ifttt.provider.permission.READ_RULES">
+        </provider>
+
     </application>
 
 </manifest>
