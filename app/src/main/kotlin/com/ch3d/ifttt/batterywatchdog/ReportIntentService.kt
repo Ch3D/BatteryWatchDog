@@ -17,6 +17,6 @@ class ReportIntentService : IntentService(ReportIntentService::class.java.simple
 
     override fun onHandleIntent(intent: Intent?) {
         val rule = intent?.getParcelableExtra<BaseRule>(Rule.EXTRA_RULE) as BaseRule
-        ReportApiFactory.create(this).report(rule)
+        ReportApiFactory.create().report(rule)
     }
 }
