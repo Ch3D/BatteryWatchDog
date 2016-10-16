@@ -5,7 +5,7 @@ import android.os.Build
 import android.preference.PreferenceManager.getDefaultSharedPreferences
 import com.ch3d.android.utils.StringUtils
 
-class PrefrencesProvider {
+class PreferencesProvider {
     companion object {
         private val DEFAULT_RESULT = ""
 

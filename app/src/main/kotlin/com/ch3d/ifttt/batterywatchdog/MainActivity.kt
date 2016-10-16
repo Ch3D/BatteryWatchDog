@@ -1,16 +1,15 @@
 package com.ch3d.ifttt.batterywatchdog
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import com.ch3d.android.utils.StringUtils.Companion.EMPTY_STRING
-import com.ch3d.ifttt.batterywatchdog.model.BaseRule
+import com.ch3d.ifttt.batterywatchdog.model.Rule
 import com.ch3d.ifttt.batterywatchdog.model.RuleData
+import com.ch3d.ifttt.batterywatchdog.modelimport.BaseRule
 import com.ch3d.ifttt.batterywatchdog.utils.*
-import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 RuleData(getCustomDeviceName() ?: EMPTY_STRING))
 
         if (getCustomDeviceName() == null) {
-            saveCustomDeviceName(PrefrencesProvider.getDefaultDeviceName())
+            saveCustomDeviceName(PreferencesProvider.getDefaultDeviceName())
         }
         if (getCustomEventName() == null) {
             saveCustomEventName(BaseRule.EVENT_BATTERY_LOW)
@@ -81,33 +80,37 @@ class MainActivity : AppCompatActivity() {
 
         btn_save.isEnabled = false
         btn_save.setOnClickListener {
-            saveIftttKey(edit_key.text())
+//            saveIftttKey(edit_key.text())
+//
+//            val enabledCustomName = checkbox_custom_device_name.isChecked
+//            setCustomNameEnabled(enabledCustomName)
+//            if (enabledCustomName) {
+//                saveCustomDeviceName(edit_custom_device_name.text())
+//            }
+//
+//            val enabledCustomEvent = checkbox_custom_event.isChecked
+//            setCustomEventEnabled(enabledCustomEvent)
+//            if (enabledCustomEvent) {
+//                saveCustomEventName(edit_custom_event.text())
+//            }
+//
+//            Toast.makeText(this@MainActivity, R.string.main_toast_data_saved, LENGTH_SHORT).show()
+//
+//            btn_save.isEnabled = false
+//            initialData = BaseRule(0,
+//                    edit_key.text(),
+//                    edit_custom_event.text(),
+//                    RuleData(edit_custom_device_name.text()))
+//            val realm = Realm.getDefaultInstance()
+//            realm.beginTransaction()
+//            val realmRule = realm.copyToRealmOrUpdate(initialData)
+//            realm.commitTransaction()
+//
+//            hideKeyboard()
 
-            val enabledCustomName = checkbox_custom_device_name.isChecked
-            setCustomNameEnabled(enabledCustomName)
-            if (enabledCustomName) {
-                saveCustomDeviceName(edit_custom_device_name.text())
-            }
-
-            val enabledCustomEvent = checkbox_custom_event.isChecked
-            setCustomEventEnabled(enabledCustomEvent)
-            if (enabledCustomEvent) {
-                saveCustomEventName(edit_custom_event.text())
-            }
-
-            Toast.makeText(this@MainActivity, R.string.main_toast_data_saved, LENGTH_SHORT).show()
-
-            btn_save.isEnabled = false
-            initialData = BaseRule(0,
-                    edit_key.text(),
-                    edit_custom_event.text(),
-                    RuleData(edit_custom_device_name.text()))
-            val realm = Realm.getDefaultInstance()
-            realm.beginTransaction()
-            val realmRule = realm.copyToRealmOrUpdate(initialData)
-            realm.commitTransaction()
-
-            hideKeyboard()
+            val reportIntent = Intent(this, ReportIntentService::class.java)
+            reportIntent.putExtra(Rule.EXTRA_RULE, BaseRule(0, "key", "event", RuleData("100")))
+            startService(reportIntent)
         }
     }
 

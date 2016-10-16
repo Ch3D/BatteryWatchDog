@@ -1,34 +1,35 @@
 package com.ch3d.ifttt.batterywatchdog.utils
 
 import android.content.Context
-import com.ch3d.ifttt.batterywatchdog.PrefrencesProvider
+import com.ch3d.ifttt.batterywatchdog.PreferencesProvider
 
 fun Context.isCustomNameEnabled() =
-        PrefrencesProvider.isCustomNameEnabled(this)
+        PreferencesProvider.isCustomNameEnabled(this)
 
 fun Context.setCustomNameEnabled(enabled: Boolean) =
-        PrefrencesProvider.setCustomNameEnabled(this, enabled)
+        PreferencesProvider.setCustomNameEnabled(this, enabled)
 
 fun Context.getCustomDeviceName() =
-        PrefrencesProvider.getCustomDeviceName(this)
+        PreferencesProvider.getCustomDeviceName(this)
 
 fun Context.saveCustomDeviceName(name: String) =
-        PrefrencesProvider.saveCustomDeviceName(this, name)
+        PreferencesProvider.saveCustomDeviceName(this, name)
 
 fun Context.isCustomEventEnabled() =
-        PrefrencesProvider.isCustomEventEnabled(this)
+        PreferencesProvider.isCustomEventEnabled(this)
 
 fun Context.setCustomEventEnabled(enabled: Boolean) =
-        PrefrencesProvider.setCustomEventEnabled(this, enabled)
+        PreferencesProvider.setCustomEventEnabled(this, enabled)
 
 fun Context.getCustomEventName() =
-        PrefrencesProvider.getCustomEventName(this)
+        PreferencesProvider.getCustomEventName(this)
 
 fun Context.saveCustomEventName(name: String) =
-        PrefrencesProvider.saveCustomEventName(this, name)
+        PreferencesProvider.saveCustomEventName(this, name)
 
-fun Context.getIftttKey() = PrefrencesProvider.getIftttKey(this)
-fun Context.saveIftttKey(key: String) = PrefrencesProvider.saveIftttKey(this, key)
+fun Context.getIftttKey() = PreferencesProvider.getIftttKey(this)
+fun Context.saveIftttKey(key: String) = PreferencesProvider.saveIftttKey(this, key)
 
-fun Context.isReportingEnabled() = PrefrencesProvider.isReportinEnabled(this)
-fun Context.setReportinEnabled(enabled: Boolean) = PrefrencesProvider.setReportinEnabled(this, enabled)
+fun Context.isReportingEnabled() = PreferencesProvider.isReportinEnabled(this)
+fun Context.setReportinEnabled(enabled: Boolean) =
+        PreferencesProvider.setReportinEnabled(this, enabled)
