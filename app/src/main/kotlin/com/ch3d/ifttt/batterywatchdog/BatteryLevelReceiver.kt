@@ -1,22 +1,20 @@
 package com.ch3d.ifttt.batterywatchdog
 
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_BATTERY_CHANGED
 import android.content.IntentFilter
 import android.os.BatteryManager.EXTRA_LEVEL
+import android.support.v4.content.WakefulBroadcastReceiver
 import android.text.TextUtils
-import com.ch3d.ifttt.batterywatchdog.PrefrencesProvider.Companion.getDefaultDeviceName
-import com.ch3d.ifttt.batterywatchdog.model.BaseRule
+import com.ch3d.ifttt.batterywatchdog.PreferencesProvider.Companion.getDefaultDeviceName
+import com.ch3d.ifttt.batterywatchdog.model.Rule
 import com.ch3d.ifttt.batterywatchdog.model.RuleData
-import com.ch3d.ifttt.batterywatchdog.network.ReportApiFactory
-import com.ch3d.ifttt.batterywatchdog.utils.getCustomDeviceName
-import com.ch3d.ifttt.batterywatchdog.utils.getIftttKey
-import com.ch3d.ifttt.batterywatchdog.utils.isCustomNameEnabled
-import com.ch3d.ifttt.batterywatchdog.utils.isReportingEnabled
+import com.ch3d.ifttt.batterywatchdog.modelimport.BaseRule
+import com.ch3d.ifttt.batterywatchdog.utils.*
 
-class BatteryLevelReceiver : BroadcastReceiver() {
+class BatteryLevelReceiver : WakefulBroadcastReceiver() {
+
     override fun onReceive(context: Context, intent: Intent) {
         if (!context.isReportingEnabled()) {
             return
@@ -30,12 +28,15 @@ class BatteryLevelReceiver : BroadcastReceiver() {
         val deviceName = if (context.isCustomNameEnabled())
             context.getCustomDeviceName() else getDefaultDeviceName()
 
-        ReportApiFactory
-                .create(context)
-                .report(
-                        BaseRule(0, key!!, BaseRule.EVENT_BATTERY_LOW,
-                                RuleData(deviceName!!, getBatteryPercentage(context)))
-                )
+        val event = if (context.isCustomEventEnabled())
+            context.getCustomEventName() else RuleData.EVENT_BATTERY_LOW
+
+        val data = BaseRule(0, key!!, event!!,
+                RuleData(deviceName!!, getBatteryPercentage(context)))
+
+        val reportIntent = Intent(context, ReportIntentService::class.java)
+        reportIntent.putExtra(Rule.EXTRA_RULE, data)
+        context.startService(reportIntent)
     }
 
     private fun getBatteryPercentage(context: Context): String {

@@ -35,6 +35,11 @@
             android:readPermission="com.ch3d.ifttt.provider.permission.READ_RULES">
         </provider>
 
+        <service
+            android:name=".ReportIntentService"
+            android:enabled="true"
+            android:exported="false" />
+
     </application>
 
 </manifest>
