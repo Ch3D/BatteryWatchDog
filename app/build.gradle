@@ -45,7 +45,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'com.github.ch3d:androidutils:1.0.3'
+    compile 'com.github.ch3d:androidutils:1.0.4'
 }
 repositories {
     mavenCentral()
