@@ -8,7 +8,7 @@ import android.os.BatteryManager.EXTRA_LEVEL
 import android.support.v4.content.WakefulBroadcastReceiver
 import android.text.TextUtils
 import com.ch3d.ifttt.batterywatchdog.PreferencesProvider.Companion.getDefaultDeviceName
-import com.ch3d.ifttt.batterywatchdog.model.Rule
+import com.ch3d.ifttt.batterywatchdog.model.Rule.Companion.EXTRA_RULE
 import com.ch3d.ifttt.batterywatchdog.model.RuleData
 import com.ch3d.ifttt.batterywatchdog.modelimport.BaseRule
 import com.ch3d.ifttt.batterywatchdog.utils.*
@@ -35,7 +35,7 @@ class BatteryLevelReceiver : WakefulBroadcastReceiver() {
                 RuleData(deviceName!!, getBatteryPercentage(context)))
 
         val reportIntent = Intent(context, ReportIntentService::class.java)
-        reportIntent.putExtra(Rule.EXTRA_RULE, data)
+                .putExtra(EXTRA_RULE, data)
         context.startService(reportIntent)
     }
 
