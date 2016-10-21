@@ -6,9 +6,12 @@ import android.net.Uri
  * TODO add javadocs
  */
 object RulesContract {
-    val RULES_URI = Uri.parse("content://com.ch3d.ifttt/rules")
+    const val AUTHORITY = "com.ch3d.ifttt"
 
-    val PERMISSION_READ = "com.ch3d.ifttt.provider.permission.READ_RULES"
+    val RULES_URI = Uri.parse("content://${AUTHORITY}/rules")
+    val DISPATCHER_URI = Uri.parse("content://${AUTHORITY}/dispatcher")
+
+    val PERMISSION_READ = "${AUTHORITY}.provider.permission.READ_RULES"
 
     object RuleColumns {
         val ID = "_id"
@@ -24,5 +27,5 @@ object RulesContract {
         return Uri.withAppendedPath(RULES_URI, ruleId.toString())
     }
 
-    val URI_TYPE_RULE_ITEM = "vnd.android.cursor.item/vnd.anydo.task"
+    val URI_TYPE_RULE_ITEM = "vnd.android.cursor.item/vnd.batterwatchdog.rule"
 }
