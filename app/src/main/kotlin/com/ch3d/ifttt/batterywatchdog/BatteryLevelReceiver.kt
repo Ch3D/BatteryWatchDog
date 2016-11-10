@@ -6,7 +6,6 @@ import android.content.Intent.ACTION_BATTERY_CHANGED
 import android.content.IntentFilter
 import android.os.BatteryManager.EXTRA_LEVEL
 import android.support.v4.content.WakefulBroadcastReceiver
-import android.text.TextUtils
 import com.ch3d.ifttt.batterywatchdog.PreferencesProvider.Companion.getDefaultDeviceName
 import com.ch3d.ifttt.batterywatchdog.model.Rule.Companion.EXTRA_RULE
 import com.ch3d.ifttt.batterywatchdog.model.RuleData
@@ -21,23 +20,23 @@ class BatteryLevelReceiver : WakefulBroadcastReceiver() {
         }
 
         val key = context.getIftttKey()
-        if (TextUtils.isEmpty(key)) {
-            return
+        if (!key.isNullOrBlank()) {
+            val ruleData = RuleData(getDeviceName(context), getBatteryPercentage(context))
+            val data = BaseRule(0, key!!, getEventName(context), ruleData)
+
+            val reportIntent = Intent(context, ReportIntentService::class.java)
+                    .putExtra(EXTRA_RULE, data)
+            context.startService(reportIntent)
         }
-
-        val deviceName = if (context.isCustomNameEnabled())
-            context.getCustomDeviceName() else getDefaultDeviceName()
-
-        val event = if (context.isCustomEventEnabled())
-            context.getCustomEventName() else RuleData.EVENT_BATTERY_LOW
-
-        val data = BaseRule(0, key!!, event!!,
-                RuleData(deviceName!!, getBatteryPercentage(context)))
-
-        val reportIntent = Intent(context, ReportIntentService::class.java)
-                .putExtra(EXTRA_RULE, data)
-        context.startService(reportIntent)
     }
+
+    private fun getEventName(context: Context) =
+            if (context.isCustomEventEnabled()) context.getCustomEventName() ?: RuleData.EVENT_BATTERY_LOW
+            else RuleData.EVENT_BATTERY_LOW
+
+    private fun getDeviceName(context: Context) =
+            if (context.isCustomNameEnabled()) context.getCustomDeviceName() ?: getDefaultDeviceName()
+            else getDefaultDeviceName()
 
     private fun getBatteryPercentage(context: Context): String {
         val batteryStatus = context.registerReceiver(null, IntentFilter(ACTION_BATTERY_CHANGED))
