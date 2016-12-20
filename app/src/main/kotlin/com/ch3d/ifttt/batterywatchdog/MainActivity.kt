@@ -10,16 +10,24 @@ import com.ch3d.android.utils.StringUtils.Companion.EMPTY_STRING
 import com.ch3d.ifttt.batterywatchdog.model.RuleData
 import com.ch3d.ifttt.batterywatchdog.modelimport.BaseRule
 import com.ch3d.ifttt.batterywatchdog.utils.*
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
+
+    private val firebaseAnalytics: FirebaseAnalytics by lazy {
+        (application as App).firebaseAnalytics
+    }
 
     internal lateinit var initialData: BaseRule
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        firebaseAnalytics.logEvent("MAIN_ACTIVITY_START", Bundle())
 
         initialData = BaseRule(0,
                 getIftttKey() ?: EMPTY_STRING,
