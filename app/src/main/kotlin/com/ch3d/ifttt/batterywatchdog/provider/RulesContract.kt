@@ -14,9 +14,9 @@ object RulesContract {
         val ID = "_id"
         val KEY = "key"
         val EVENT_NAME = "event_name"
-        val VALUE_1 = "value_1"
-        val VALUE_2 = "value_2"
-        val VALUE_3 = "value_3"
+        val VALUE1 = "value1"
+        val VALUE2 = "value2"
+        val VALUE3 = "value3"
     }
 
     // Generate URI for a specific task's notes

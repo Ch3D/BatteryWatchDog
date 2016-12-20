@@ -4,9 +4,9 @@ import android.content.ContentValues
 import android.os.Parcel
 import android.os.Parcelable
 import com.ch3d.android.utils.StringUtils.Companion.EMPTY_STRING
-import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE_1
-import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE_2
-import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE_3
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE1
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE2
+import com.ch3d.ifttt.batterywatchdog.provider.RulesContract.RuleColumns.VALUE3
 import io.realm.RealmObject
 import io.realm.annotations.RealmClass
 
@@ -18,16 +18,16 @@ internal open class RuleData(var value1: String = EMPTY_STRING,
     constructor() : this(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING)
 
     constructor(values: ContentValues) : this(
-            values.getAsString(VALUE_1),
-            values.getAsString(VALUE_2),
-            values.getAsString(VALUE_3)
+            values.getAsString(VALUE1),
+            values.getAsString(VALUE2),
+            values.getAsString(VALUE3)
     )
 
     fun contentValues(): ContentValues? {
         val result = ContentValues()
-        result.put(VALUE_1, value1)
-        result.put(VALUE_2, value2)
-        result.put(VALUE_3, value3)
+        result.put(VALUE1, value1)
+        result.put(VALUE2, value2)
+        result.put(VALUE3, value3)
         return result
     }
 

@@ -17,7 +17,7 @@ class RulesContentProvider : android.content.ContentProvider() {
         if (values == null)
             return Uri.EMPTY
         else
-            ReportApiFactory.create().report(Rule.Companion.create(values))
+            ReportApiFactory.create(context).report(Rule.Companion.create(values))
 
         return Uri.EMPTY
     }

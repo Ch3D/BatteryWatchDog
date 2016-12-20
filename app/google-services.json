@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "601681233015",
+    "firebase_url": "https://testproject-fd764.firebaseio.com",
+    "project_id": "testproject-fd764",
+    "storage_bucket": "testproject-fd764.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601681233015:android:11dad3bfd1147949",
+        "android_client_info": {
+          "package_name": "com.ch3d.ifttt.batterywatchdog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601681233015-oo8m6c0abehpn1l8ul3ioo509os3l6ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJr8bN_kxu8xP-RbNKnL7CrO9YxC5kHXE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
